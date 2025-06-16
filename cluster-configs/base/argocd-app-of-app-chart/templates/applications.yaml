@@ -14,7 +14,6 @@ metadata:
 {{ toYaml . | indent 4 }}
 {{- end }}
 {{- end }}
-
 {{- if or $val.annotations $.Values.default.app.annotations }}
 {{- $appAnnotations := $val.annotations }}
 {{- $defaultAnnotations := $.Values.default.app.annotations }}
@@ -48,15 +47,16 @@ spec:
       {{- if (hasKey $val "autoSyncPrune" | ternary $val.autoSyncPrune $.Values.default.app.autoSyncPrune) }}
       prune: true
       {{- end }}
-    {{- if hasKey $val "syncPolicyRetry" }}
-    retry: {{- toYaml $val.syncPolicyRetry | nindent 6 }}
+    {{- with (coalesce $val.syncPolicyRetry $.Values.default.app.syncPolicyRetry) }}
+    retry:
+      {{- toYaml . | nindent 6 }}
     {{- end }}
-    {{- if hasKey $val "syncOptions" }}
+    {{- if or (hasKey $val "syncOptions") $.Values.default.app.syncOptions }}
     syncOptions:
-      {{- with $val.syncOptions }}
-      {{ toYaml . }}
+      {{- with (coalesce $val.syncOptions $.Values.default.app.syncOptions) }}
+      {{- toYaml . | nindent 6 }}
       {{- end }}
-    {{- end}}
+    {{- end }}
 {{- end }}
   source:
     path: {{ tpl $val.source.path $ }}
