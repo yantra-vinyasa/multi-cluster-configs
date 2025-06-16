@@ -15,12 +15,11 @@ default:
       targetRevision: main
     syncOptions:
     - ApplyOutOfSyncOnly=true
-    - PrunePropagationPolicy=foreground
     - PruneLast=true
     - ServerSideApply=true  
     - FailOnSharedResource=true
     - RespectIgnoreDifferences=true
-    - CreateNamespace=false
+    - CreateNamespace=true
     syncPolicyRetry:
       limit: -1 # number of failed sync attempt retries; unlimited number of attempts if less than 0
       backoff:
