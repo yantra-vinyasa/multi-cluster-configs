@@ -28,7 +28,7 @@ kustomize build bootstrap/overlays/dev/gitops-operator | oc apply -f -
 
 2. **Install the External Secrets Operator**
 
-The External Secrets Operator is used to fetch secrets from a secret store (like Vault) and create Kubernetes secrets from them. This allows us to keep sensitive data out of Git.
+The External Secrets Operator is used to fetch secrets from a secret store (like Vault or Gitlab) and create Kubernetes secrets from them. This allows us to keep sensitive data out of Git repository.
 
 ```bash
 kustomize build bootstrap/overlays/dev/external-secrets-operator | oc apply -f -
