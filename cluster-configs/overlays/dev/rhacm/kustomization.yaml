@@ -1,0 +1,27 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ../../../base/rhacm
+
+# Enabling CIM capabilities 
+- cim/agent-service-config.yaml
+
+# Adding placements
+- placements/all-clusters.yaml
+- placements/hub-only.yaml
+- placements/workload-clusters.yaml
+
+patches:
+- path: patch-channel.yaml
+  target:
+    kind: Subscription
+
+- path: patch-managedclusterset.yaml
+  target:
+    kind: ManagedClusterSet
+
+- path: patch-managedclustersetbinding.yaml
+  target:
+    kind: ManagedClusterSetBinding

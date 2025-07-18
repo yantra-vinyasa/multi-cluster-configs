@@ -1,0 +1,12 @@
+---
+apiVersion: cluster.open-cluster-management.io/v1beta2
+kind: ManagedClusterSetBinding
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+  name: demo-rhacm-policies
+  namespace: demo-rhacm-policies
+spec:
+  clusterSet: patch_me
+
+ 
