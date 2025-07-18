@@ -19,6 +19,8 @@
 
 Configuring a new cluster (e.g. here dev cluster ) requires the execution of the following commands :
 
+**Note 🚨:** Before proceeding, ensure you have created the necessary Kubernetes secrets with the correct permissions for both the ArgoCD (GitOps) Operator to access the Git repository and for the External Secrets Operator to authenticate with your chosen secret store (e.g., Gitlab,Vault).
+
 1. **Install the OpenShift GitOps Operator**
 
 The OpenShift GitOps Operator is the foundation of our GitOps setup. It installs and manages ArgoCD on the cluster.
