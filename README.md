@@ -35,4 +35,5 @@ kustomize build bootstrap/overlays/dev/external-secrets-operator | oc apply -f -
 ``` 
 
 3. **App of Apps Pattern is executed**
+
 Once these bootstrap components are installed, the `appofapp.yaml` in `bootstrap/overlays/dev/gitops-operator` will deploy the cluster configurations defined in `cluster-configs`. 
