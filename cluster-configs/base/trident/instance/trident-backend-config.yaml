@@ -1,0 +1,19 @@
+apiVersion: trident.netapp.io/v1
+kind: TridentBackendConfig
+metadata:
+  name: demo-netapp-nas
+  namespace: trident
+spec:
+  version: 1
+  backendName: demo-netapp-nas
+  storageDriverName: ontap-nas
+  managementLIF: patch-me-in-overlay
+  dataLIF: patch-me-in-overlay
+  svm: patch-me-in-overlay
+  credentials:
+    name: demo-netapp-nas
+  aggregate: patch-me-in-overlay
+  defaults:
+    spaceReserve: none
+  autoExportPolicy: true
+  nfsMountOptions: "nfsvers=4.0"

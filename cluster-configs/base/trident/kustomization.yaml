@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- operator/ns.yaml
+- operator/operator-group.yaml
+- operator/subscription.yaml
+
+- instance/trident-orchestrator.yaml
+- instance/trident-backend-config.yaml
+- instance/trident-storageclass.yaml
+
