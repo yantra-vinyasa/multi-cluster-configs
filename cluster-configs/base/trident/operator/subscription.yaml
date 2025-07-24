@@ -6,7 +6,7 @@ metadata:
   namespace: trident
 spec:
   sourceNamespace: openshift-marketplace
-  source: redhat-operators
+  source: certified-operators
   channel: stable
   installPlanApproval: Automatic
   name: trident-operator
