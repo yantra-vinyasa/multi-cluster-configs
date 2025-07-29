@@ -14,6 +14,7 @@
 ### GitOps:
 * [What is GitOps](https://opengitops.dev/)
 * [App of Apps pattern](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/)
+* [Red Hat CoP GitOps Catalog](https://github.com/redhat-cop/gitops-catalog): A collection of curated GitOps patterns and examples.
   
 ### Bootstrap process:
 
