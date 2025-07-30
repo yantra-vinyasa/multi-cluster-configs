@@ -1,0 +1,58 @@
+---
+globs: **/kustomization.yaml,base/**,overlays/**
+description: Kustomize project structure and kustomization.yaml requirements
+---
+
+# Kustomize Structure Guidelines
+
+## Directory Structure
+Every Kustomize-managed component follows this pattern:
+```
+component-name/
+├── base/
+│   ├── kustomization.yaml    # Required
+│   └── *.yaml               # Core manifests
+└── overlays/
+    └── environment/
+        ├── kustomization.yaml # Required
+        └── patch-*.yaml      # Environment patches
+```
+
+## kustomization.yaml Requirements
+
+### Base Directories
+```yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - resource1.yaml
+  - resource2.yaml
+
+# Optional: Common labels, annotations, namespace
+```
+
+### Overlay Directories
+```yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+bases:
+  - ../../base
+
+patchesStrategicMerge:
+  - patch-*.yaml
+
+# Environment-specific customizations
+```
+
+## Patch Naming Convention
+- `patch-*.yaml`: Strategic merge patches
+- Use descriptive names: `patch-channel.yaml`, `patch-rbac.yaml`, `patch-sub-channel.yaml`
+
+## Component Organization
+- **operator/**: Operator installation (Subscription, OperatorGroup, Namespace)
+- **instance/**: Operator instance configuration
+- **resources/**: Supporting resources (ConfigMaps, Secrets, RBAC)
+
+Every directory participating in Kustomize builds **must** have a `kustomization.yaml` file.

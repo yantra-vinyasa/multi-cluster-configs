@@ -1,0 +1,35 @@
+# Local environment files & secrets
+.env
+*.local
+secrets.yaml
+credentials.json
+
+# IDE and editor directories
+.idea/
+.vscode/
+.history/
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# Build artifacts and temporary files
+/build/
+/dist/
+/out/
+
+# Kustomize build output (if you generate it locally)
+kustomize-build/
+
+# Helm packaged charts
+*.tgz
+
+# Terraform state files
+.terraform/
+*.tfstate
+*.tfstate.backup
+
+

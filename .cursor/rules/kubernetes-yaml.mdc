@@ -1,0 +1,36 @@
+---
+globs: *.yaml,*.yml
+description: Kubernetes YAML file standards and conventions
+---
+
+# Kubernetes YAML Standards
+
+## File Naming
+- Use `.yaml` extension (not `.yml`) for all Kubernetes configuration files
+- Use descriptive, kebab-case names (e.g., `cluster-secret-store.yaml`, `node-feature-discovery.yaml`)
+
+## YAML Formatting
+- Use 2-space indentation
+- Include appropriate metadata labels and annotations
+- Follow Kubernetes API conventions for resource naming
+
+## Required Fields
+All Kubernetes resources should include:
+```yaml
+apiVersion: # Correct API version
+kind: # Resource type
+metadata:
+  name: # Descriptive name
+  namespace: # When applicable
+spec: # Resource specification
+```
+
+## Common Resources
+- **Operators**: Define in `operator/` subdirectories with subscription.yaml
+- **Instances**: Define in `instance/` subdirectories 
+- **Resources**: Additional supporting resources in `resources/` subdirectories
+
+## Validation
+- Ensure YAML syntax is valid
+- Verify Kubernetes resource schemas
+- Check for required fields and proper indentation

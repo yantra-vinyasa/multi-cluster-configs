@@ -1,0 +1,33 @@
+---
+alwaysApply: true
+description: Multi-cluster Kubernetes GitOps repository structure and conventions
+---
+
+# Multi-Cluster Kubernetes GitOps Repository
+
+This repository follows GitOps principles for managing Kubernetes configurations across multiple clusters.
+
+## Repository Structure
+
+- **bootstrap/**: Initial cluster setup components (operators, ArgoCD)
+  - `base/`: Core operator definitions and configurations
+  - `overlays/`: Environment-specific customizations
+- **cluster-configs/**: Application and infrastructure configurations
+  - `base/`: Core Kubernetes manifests and Helm charts
+  - `overlays/`: Environment-specific patches and customizations
+- **docs/**: Documentation and guidelines
+- **tools/**: Utility scripts and tools
+
+## Key Principles
+
+1. **Declarative Configuration**: All infrastructure and application state is defined declaratively in YAML
+2. **Kustomize Structure**: Follow base/overlays pattern for environment-specific customizations
+3. **Security First**: Use ExternalSecrets for all sensitive data, never commit secrets directly
+4. **Immutable Infrastructure**: Changes are made through Git commits, not direct cluster modifications
+
+## Environment Overlays
+
+- `dev/`: Development environment configurations
+- `prod/`: Production environment configurations (when present)
+
+All changes to cluster state must be made through this Git repository.

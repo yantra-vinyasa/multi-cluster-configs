@@ -1,0 +1,53 @@
+---
+alwaysApply: true
+description: GitOps workflow and change management practices
+---
+
+# GitOps Workflow Guidelines
+
+## Core Principle
+**The Git repository is the single source of truth for cluster state.**
+
+## Making Changes
+
+### 1. Declarative Changes Only
+- All cluster modifications must be made through YAML commits
+- No imperative `kubectl` commands for permanent changes
+- No manual cluster modifications
+
+### 2. Change Process
+1. Create feature branch
+2. Make declarative changes to YAML files
+3. Test changes in development environment first
+4. Submit pull request for review
+5. Merge to main branch
+6. ArgoCD automatically applies changes
+
+### 3. Environment Promotion
+- **Development First**: Test all changes in `overlays/dev/` first
+- **Production**: Apply to production overlays only after dev validation
+- **Rollback**: Use Git revert for quick rollbacks
+
+### 4. Operator Management
+- Use `Subscription` resources for operator lifecycle
+- Pin operator versions in production overlays
+- Use appropriate update channels (`stable`, `fast`, etc.)
+
+### 5. Application Deployment
+- Applications are managed through ArgoCD Applications
+- Follow the app-of-apps pattern for organization
+- Use Helm charts where appropriate with proper values files
+
+## File Organization
+- Keep related resources together in logical directories
+- Use consistent naming conventions
+- Maintain separation between base and overlay configurations
+- Document complex configurations in README.md files
+
+## Validation
+- Ensure YAML syntax is correct
+- Validate Kubernetes resource schemas
+- Test in development before production deployment
+- Use ArgoCD sync policies appropriately
+
+**Remember**: Every change goes through Git → ArgoCD → Cluster

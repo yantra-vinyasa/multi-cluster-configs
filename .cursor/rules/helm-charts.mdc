@@ -1,0 +1,68 @@
+---
+globs: **/Chart.yaml,**/values*.yaml,**/templates/**
+description: Helm chart development and management guidelines
+---
+
+# Helm Chart Guidelines
+
+## Chart Structure
+```
+chart-name/
+├── Chart.yaml           # Chart metadata
+├── values.yaml         # Default values
+├── values-dev/         # Environment-specific values
+│   ├── ocp1-dev.yaml
+│   └── ocp1-prod.yaml
+└── templates/          # Kubernetes templates
+    └── *.yaml
+```
+
+## Chart.yaml Requirements
+```yaml
+apiVersion: v2
+name: chart-name
+description: A Helm chart for Kubernetes
+type: application
+version: 0.1.0
+appVersion: "1.0"
+```
+
+## Values Files Organization
+- `values.yaml`: Default values and documentation
+- `values-dev/`: Environment-specific value overrides
+- `values-prod/`: Production-specific values (when applicable)
+
+## Template Best Practices
+- Use descriptive resource names with chart name prefix
+- Include proper labels and selectors
+- Make resources configurable through values
+- Add helpful comments in templates
+- Use Helm template functions appropriately
+
+## Common Patterns
+```yaml
+# Consistent labeling
+metadata:
+  labels:
+    app.kubernetes.io/name: {{ include "chart.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/version: {{ .Chart.AppVersion }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+```
+
+## Integration with ArgoCD
+- Charts should be deployable via ArgoCD Applications
+- Use appropriate sync policies
+- Consider using Helm hooks where necessary
+- Validate chart rendering with `helm template`
+
+## Environment-Specific Deployment
+Use different values files for different environments:
+```yaml
+# ArgoCD Application
+spec:
+  source:
+    helm:
+      valueFiles:
+        - values-dev/ocp1-dev.yaml
+```

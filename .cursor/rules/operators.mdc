@@ -1,0 +1,97 @@
+---
+globs: **/operator/**,**/subscription.yaml,**/operator-group.yaml
+description: OpenShift/Kubernetes operator installation and management patterns
+---
+
+# Operator Management Guidelines
+
+## Standard Operator Structure
+```
+operator-name/
+├── operator/
+│   ├── namespace.yaml        # Operator namespace
+│   ├── operator-group.yaml   # OperatorGroup
+│   └── subscription.yaml     # Operator subscription
+└── instance/
+    └── instance.yaml        # Operator instance/CR
+```
+
+## Namespace Creation
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: operator-namespace
+  labels:
+    name: operator-namespace
+```
+
+## OperatorGroup Pattern
+```yaml
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: operator-name-og
+  namespace: operator-namespace
+spec:
+  targetNamespaces:
+    - operator-namespace  # Or cluster-wide with empty spec
+```
+
+## Subscription Configuration
+```yaml
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: operator-name
+  namespace: operator-namespace
+spec:
+  channel: stable          # Use stable, fast, or specific version
+  name: operator-package-name
+  source: redhat-operators # or certified-operators, community-operators
+  sourceNamespace: openshift-marketplace
+  installPlanApproval: Automatic  # or Manual for production
+```
+
+## Environment-Specific Overrides
+Use overlays to patch operator configurations:
+
+### Channel Patches (`patch-channel.yaml`)
+```yaml
+- op: replace
+  path: /spec/channel
+  value: "stable-4.14"
+```
+
+### Subscription Patches (`patch-sub-channel.yaml`)
+```yaml
+- op: replace
+  path: /spec/channel
+  value: "fast"
+- op: replace
+  path: /spec/installPlanApproval
+  value: "Manual"
+```
+
+## Common Operators in Repository
+- **external-secrets-operator**: Secret management
+- **gitops-operator**: ArgoCD for GitOps
+- **gpu-operator-certified**: GPU support
+- **openshift-logging**: Cluster logging
+- **rhacm**: Red Hat Advanced Cluster Management
+- **openshift-ai**: AI/ML workloads
+
+## Best Practices
+- Pin channels in production environments
+- Use Manual approval for production operators
+- Separate operator installation from instance creation
+- Include appropriate RBAC configurations
+- Use consistent naming conventions
+- Document operator-specific configurations in README.md files
+
+## Instance Management
+Create operator instances after operator installation:
+- Use separate `instance/` directory
+- Follow operator-specific CRD schemas
+- Include environment-specific configurations
+- Test in development before production deployment

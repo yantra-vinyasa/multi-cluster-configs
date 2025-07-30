@@ -1,0 +1,53 @@
+# Git directory
+.git/
+
+# Local environment files & secrets
+.env
+*.local
+secrets.yaml
+credentials.json
+*.key
+*.pem
+*.crt
+kubeconfig*
+
+# IDE and editor directories
+.idea/
+.vscode/
+.history/
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+*.out
+
+# Kustomize build output and temporary files
+kustomize-build/
+kustomize-output/
+rendered/
+generated/
+tmp/
+temp/
+
+# Helm packaged charts and temporary files
+*.tgz
+chart-releases/
+helm-output/
+
+# Kubernetes temporary files
+kubectl-*.yaml
+kubectl-*.yml
+*.tmp.yaml
+*.tmp.yml
+
+# ArgoCD temporary files
+argocd-*.yaml
+argocd-*.yml
+
+# Backup files
+*.bak
+*.backup
+*~
