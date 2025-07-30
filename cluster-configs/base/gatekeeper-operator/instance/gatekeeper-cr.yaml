@@ -1,0 +1,27 @@
+apiVersion: operator.gatekeeper.sh/v1alpha1
+kind: Gatekeeper
+metadata:
+  name: gatekeeper
+spec:
+  audit:
+    logLevel: INFO
+    violationsToReport: 20
+    auditInterval: 300s
+    constraintViolationLimit: 20
+    auditFromCache: false
+    auditChunkSize: 500
+  validatingWebhook:
+    logLevel: INFO
+    emitAdmissionEvents: true
+    enabled: true
+    failurePolicy: Ignore
+    webhookTimeout: 3
+  webhook:
+    logLevel: INFO
+    emitAdmissionEvents: true
+    enabled: true
+    failurePolicy: Ignore
+    webhookTimeout: 3
+  readiness:
+    logLevel: INFO
+
