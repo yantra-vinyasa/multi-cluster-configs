@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: timeout-ds
+  namespace: timeout-ds
+  labels:
+    app: timeout-ds
+spec:
+  selector:
+    matchLabels:
+      app: timeout-ds
+  template:
+    metadata:
+      labels:
+        app: timeout-ds
+    spec:
+      serviceAccountName: timeout-ds-sa
+      nodeSelector:
+        node-role.kubernetes.io/worker: ""
+      priorityClassName: system-node-critical
+      tolerations:
+      - operator: "Exists"
+      containers:
+        - name: script-runner
+          image: registry.access.redhat.com/ubi9/ubi-minimal:latest
+          command:
+          - /bin/sh
+          - -c
+          - |
+            while true; do
+              /scripts/smoketest.sh
+              sleep 3600
+            done
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: script-volume
+              mountPath: /scripts
+      volumes:
+        - name: script-volume
+          configMap:
+            name: timeout-ds-script
+            defaultMode: 0755
