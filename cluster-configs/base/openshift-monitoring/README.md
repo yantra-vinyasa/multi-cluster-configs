@@ -2,13 +2,13 @@
 
 This component manages the `cluster-monitoring-config` _ConfigMap_ in the `openshift-monitoring` _Project_.
 
-This _ConfigMap_ is used by the `cluster-monitoring-operator` in the `openshift-monitoring` _Project_ to manage, deploy and configure the [OpenShift Monitoring Stack](https://docs.openshift.com/container-platform/latest/monitoring/understanding-the-monitoring-stack.html) in the same project.
+This _ConfigMap_ is used by the `cluster-monitoring-operator` in the `openshift-monitoring` _Project_ to manage, deploy and configure the [OpenShift Monitoring Stack](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/monitoring/index) in the same project.
 
 It deploys the Monitoring stack components on _Nodes_ with the `infra` role set.
 
 If User Workload Monitoring is enabled, then the Operator will also manage, deploy and configure a monitoring stack in the `openshift-user-workload-monitoring` _Project_.
 
-The `openshift-user-workload-monitoring` _ConfigMap_ then relates to the Prometheus instance that monitors user-defined projects only. [Creating a user-defined workload monitoring config map](https://docs.openshift.com/container-platform/latest/monitoring/configuring-the-monitoring-stack.html#creating-user-defined-workload-monitoring-configmap_configuring-the-monitoring-stack)
+The `openshift-user-workload-monitoring` _ConfigMap_ then relates to the Prometheus instance that monitors user-defined projects only. [Creating a user-defined workload monitoring config map](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html-single/monitoring/index#configuring-user-workload-monitoring)
 
  
 ## Configuration
@@ -36,5 +36,3 @@ The user-workload-monitoring is deployed in the `openshift-user-workload-monitor
 - Thanos Ruler
 
 Make sure that the cluster has enough storage to fulfill any _PersistentVolumeClaims_.
-
-[OpenShift Documentation on Troubleshooting Monitoring](https://docs.openshift.com/container-platform/latest/monitoring/troubleshooting-monitoring-issues.html)
