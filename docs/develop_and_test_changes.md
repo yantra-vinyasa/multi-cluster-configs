@@ -38,7 +38,7 @@ To add a new component to be managed by GitOps:
 1.  **Create a directory for the new component** under `cluster-configs/base/`.
 2.  **Add your Kubernetes manifests** to this new directory.
 3.  **Create a `kustomization.yaml`** file in the component's directory, listing all the Kubernetes manifests.
-4.  **Add the new component to an overlay** by adding a reference to it in the `kustomization.yaml` of the overlay (e.g., `cluster-configs/overlays/dev/kustomization.yaml`).
+4.  **Add the new component to an overlay** by adding a reference to it in the `kustomization.yaml` of the overlay (e.g., `cluster-configs/overlays/sandbox/kustomization.yaml`).
 
 ```bash
 # Commit and push your tested changes
@@ -57,7 +57,7 @@ git push origin feature/your-change-description
 
 ### Testing Strategy
 
-- Always test in the development cluster before promoting to production.
+- Always test in the sandbox cluster before promoting to production.
 - Validate configurations locally with `kustomize build`.
 
 

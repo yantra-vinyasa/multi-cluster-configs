@@ -27,7 +27,7 @@ This repository follows GitOps principles for managing Kubernetes configurations
 
 ## Environment Overlays
 
-- `dev/`: Development environment configurations
+- `sandbox/`: Sandbox environment configurations
 - `prod/`: Production environment configurations (when present)
 
 All changes to cluster state must be made through this Git repository.

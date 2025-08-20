@@ -16,7 +16,7 @@ alertConfig:
 
 cluster:
   name: ocp1
-  env: dev
+  env: sandbox
 
 msTeams:
   enabled: false

@@ -51,7 +51,7 @@ applications:
       argocd.argoproj.io/sync-wave: '1'
       argocd.argoproj.io/sync-options: ServerSideApply=true
     source:
-      path: cluster-configs/overlays/dev/infra-nodes
+      path: cluster-configs/overlays/sandbox/infra-nodes
 
 
   cluster-proxy:
@@ -59,25 +59,25 @@ applications:
       argocd.argoproj.io/sync-wave: '2'
       argocd.argoproj.io/sync-options: ServerSideApply=true
     source:
-      path: cluster-configs/overlays/dev/cluster-proxy
+      path: cluster-configs/overlays/sandbox/cluster-proxy
 
   pacman:
     annotations:
       argocd.argoproj.io/sync-wave: '3'
     source:
-      path: cluster-configs/overlays/dev/pacman
+      path: cluster-configs/overlays/sandbox/pacman
 
   chrony:
     annotations:
       argocd.argoproj.io/sync-wave: '10'
     source:
-      path: cluster-configs/overlays/dev/chrony
+      path: cluster-configs/overlays/sandbox/chrony
   
   etcd-backup:
     annotations:
       argocd.argoproj.io/sync-wave: '15'
     source:
-      path: overlays/dev/etcd-backup
+      path: overlays/sandbox/etcd-backup
     extraFields: |
       ignoreDifferences:
         - name: trusted-ca-bundle
@@ -89,40 +89,40 @@ applications:
     annotations:
       argocd.argoproj.io/sync-wave: '20'
     source:
-      path: cluster-configs/overlays/dev/web-terminal-operator
+      path: cluster-configs/overlays/sandbox/web-terminal-operator
 
   etherpad:
     annotations:
       argocd.argoproj.io/sync-wave: '30'
     source:
-      path: cluster-configs/overlays/dev/etherpad
+      path: cluster-configs/overlays/sandbox/etherpad
 
   openshift-servicemesh:
     annotations:
       argocd.argoproj.io/sync-wave: '40'
     source:
-      path: cluster-configs/overlays/dev/openshift-servicemesh
+      path: cluster-configs/overlays/sandbox/openshift-servicemesh
 
   openshift-serverless:
     annotations:
       argocd.argoproj.io/sync-wave: '50'
     source:
-      path: cluster-configs/overlays/dev/openshift-serverless
+      path: cluster-configs/overlays/sandbox/openshift-serverless
 
   nfd:
     annotations:
       argocd.argoproj.io/sync-wave: '60'
     source:
-      path: cluster-configs/overlays/dev/nfd
+      path: cluster-configs/overlays/sandbox/nfd
 
   gpu-operator-certified:
     annotations:
       argocd.argoproj.io/sync-wave: '70'
     source:
-      path: cluster-configs/overlays/dev/gpu-operator-certified
+      path: cluster-configs/overlays/sandbox/gpu-operator-certified
 
   authorino-operator:
     annotations:
       argocd.argoproj.io/sync-wave: '80'
     source:
-      path: cluster-configs/overlays/dev/authorino-operator
+      path: cluster-configs/overlays/sandbox/authorino-operator

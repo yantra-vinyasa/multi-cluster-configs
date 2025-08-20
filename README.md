@@ -28,7 +28,7 @@ Before you begin, ensure you have the following:
   
 ### Bootstrap process:
 
-Configuring a new cluster (e.g. the `dev` cluster) requires executing the following commands.
+Configuring a new cluster (e.g. the `sandbox` cluster) requires executing the following commands.
 
 **IMPORTANT NOTE ON SECRETS** 🚨
 
@@ -42,7 +42,7 @@ These are critical prerequisites for the bootstrap process to succeed.
 
 The OpenShift GitOps Operator is the foundation of our GitOps setup. It installs and manages ArgoCD on the cluster.
 ```
-kustomize build bootstrap/overlays/dev/gitops-operator | oc apply -f - 
+kustomize build bootstrap/overlays/sandbox/gitops-operator | oc apply -f - 
 ```
 
 2. **Install the External Secrets Operator**
@@ -50,12 +50,12 @@ kustomize build bootstrap/overlays/dev/gitops-operator | oc apply -f -
 The External Secrets Operator is used to fetch secrets from a secret store (like Vault or Gitlab) and create Kubernetes secrets from them. This allows us to keep sensitive data out of Git repository.
 
 ```bash
-kustomize build bootstrap/overlays/dev/external-secrets-operator | oc apply -f -
+kustomize build bootstrap/overlays/sandbox/external-secrets-operator | oc apply -f -
 ``` 
 
 3. **App of Apps Pattern is executed**
 
-Once these bootstrap components are installed, the `appofapp.yaml` in `bootstrap/overlays/dev/gitops-operator` will deploy the cluster configurations defined in `cluster-configs`.
+Once these bootstrap components are installed, the `appofapp.yaml` in `bootstrap/overlays/sandbox/gitops-operator` will deploy the cluster configurations defined in `cluster-configs`.
 
 ## Contributing
 

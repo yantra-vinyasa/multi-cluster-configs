@@ -24,8 +24,8 @@ description: GitOps workflow and change management practices
 6. ArgoCD automatically applies changes
 
 ### 3. Environment Promotion
-- **Development First**: Test all changes in `overlays/dev/` first
-- **Production**: Apply to production overlays only after dev validation
+- **Sandbox First**: Test all changes in `overlays/sandbox/` first
+- **Production**: Apply to production overlays only after sandbox validation
 - **Rollback**: Use Git revert for quick rollbacks
 
 ### 4. Operator Management
