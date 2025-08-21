@@ -1,6 +1,11 @@
 {{ if .Values.alertConfig.enabled }}
 ---
 apiVersion: v1
+kind: Secret
+metadata:
+  name: alertmanager-main
+  namespace: openshift-monitoring
+type: Opaque
 stringData:
   alertmanager.yaml: |
     route:
@@ -8,7 +13,7 @@ stringData:
       group_wait: 10s
       group_interval: 5m
       repeat_interval: 2h
-      receiver: "openshift-to-email"
+      receiver: "openshift-to-email-default"
       routes:
       {{ if .Values.msTeams.enabled }}
         - matchers:
@@ -16,11 +21,13 @@ stringData:
           receiver: openshift-to-teams
         - matchers:
           - severity: critical
-          receiver: "openshift-to-email"
+          receiver: {{ if .Values.email.critical }}"openshift-to-email-critical"{{ else }}"openshift-to-email-default"{{ end }}
       {{ else }}
+        {{ if .Values.email.critical }}
         - matchers:
-          - severity="critical"
-          receiver: openshift-to-email
+          - severity: "critical"
+          receiver: "openshift-to-email-critical"
+        {{ end }}
       {{- end }}
         - matchers:
           - severity="none"
@@ -31,16 +38,29 @@ stringData:
     receivers:
       - name: blackhole
 
-      - name: openshift-to-email
+      - name: openshift-to-email-default
         email_configs:
-          - to: suresh@example.com
-            from: openshift-noreply@example.com
-            smarthost: 'smtp.example.com:25'
+          - to: {{ .Values.email.default | join "," | quote }}
+            from: {{ .Values.email.from | quote }}
+            smarthost: {{ .Values.email.smarthost | quote }}
             require_tls: false
-            send_resolved: true
+            send_resolved: {{ .Values.email.send_resolved }}
             headers:
               subject: '{{"{{"}} template "custom_mail_subject" . {{"}}"}}'
             html: '{{"{{"}} template "custom_mail_html" . {{"}}"}}'
+      
+      {{ if .Values.email.critical }}
+      - name: openshift-to-email-critical
+        email_configs:
+          - to: {{ .Values.email.critical | join "," | quote }}
+            from: {{ .Values.email.from | quote }}
+            smarthost: {{ .Values.email.smarthost | quote }}
+            require_tls: false
+            send_resolved: {{ .Values.email.send_resolved }}
+            headers:
+              subject: '{{"{{"}} template "custom_mail_subject" . {{"}}"}}'
+            html: '{{"{{"}} template "custom_mail_html" . {{"}}"}}'
+      {{ end }}
 
       {{ if .Values.msTeams.enabled }}
       - name: openshift-to-teams
@@ -59,7 +79,6 @@ stringData:
 
     {{`{{ define "custom_mail_html" -}}`}}
     Cluster: {{ .Values.cluster.name }}<br>
-    Environment: {{ .Values.cluster.env }}<br>
     Number of alerts: {{`{{ len .Alerts }}`}} <br><br>
 
     {{`{{ range .Alerts }}`}}
@@ -75,9 +94,4 @@ stringData:
     <br>
     {{`{{ end -}}`}}
     {{`{{- end }}`}}
-kind: Secret
-metadata:
-  name: alertmanager-main
-  namespace: openshift-monitoring
-type: Opaque
 {{- end }}

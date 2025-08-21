@@ -1,8 +1,0 @@
----
-
-cluster:
-  name: ocp1
-  env: sandbox
-
-msTeams:
-  enabled: false

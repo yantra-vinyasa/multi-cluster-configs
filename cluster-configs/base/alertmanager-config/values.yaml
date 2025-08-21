@@ -1,7 +1,20 @@
 alertConfig:
   enabled: true
 
+cluster:
+  name: "sandbox"
+
 msTeams:
   enabled: false
   webhookUrl:
   connector: openshift-to-teams
+
+email:
+  smarthost: 'smtp.example.com:25'
+  from: 'openshift-noreply@example.com'
+  default:
+    - suresh@example.com
+    - oscar@example.com
+    - guru@example.com
+  critical: []
+  send_resolved: true
