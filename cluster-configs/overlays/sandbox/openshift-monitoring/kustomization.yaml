@@ -12,3 +12,8 @@ patches:
     kind: ConfigMap
     name: cluster-monitoring-config
     version: v1
+- path: patch-user-workload-monitoring-cm.yaml
+  target:
+    kind: ConfigMap
+    name: user-workload-monitoring-config
+    version: v1

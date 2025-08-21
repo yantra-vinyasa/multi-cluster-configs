@@ -4,3 +4,4 @@ kind: Kustomization
 
 resources:
 - monitoring-configmap.yaml
+- user-workload-monitoring-configmap.yaml
