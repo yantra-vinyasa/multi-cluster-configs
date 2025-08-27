@@ -1,16 +1,57 @@
 ---
-  name: Validate-YAML
-  run-name: Pipeline run by @${{ github.actor }}
+name: Validate-YAML
+run-name: Pipeline run by @${{ github.actor }}
 
-  on:
-    pull_request:
-      branches: [main]
+on:
+  pull_request:
+    branches: [main]
 
-  jobs:
-    validate-yaml:
-      steps:
-        - uses: actions/checkout@v3
-        - name: Show yamllint version
-          run: yamllint --version
-        - name: Run lint
-          run: yamllint .
+jobs:
+  validate-yaml:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Show yamllint version
+        run: yamllint --version
+      - name: Run lint
+        run: yamllint .
+
+  lint-dockerfile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: tools/Dockerimage
+
+  lint-kubernetes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Lint Kubernetes manifests
+        uses: stackrox/kube-linter-action@v1.0.8
+        with:
+          directory: .
+
+  validate-kustomize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install kustomize
+        run: |
+          curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
+          sudo mv kustomize /usr/local/bin/
+      - name: Validate kustomize overlays
+        run: |
+          find . -name "kustomization.yaml" -exec kustomize build {} \;
+
+  lint-helm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Helm
+        run: |
+          curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+      - name: Lint Helm charts
+        run: |
+          find . -name "Chart.yaml" -execdir helm lint . \;
