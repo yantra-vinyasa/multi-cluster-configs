@@ -1,0 +1,8 @@
+---
+# Sandbox specific values for Alertmanager
+msTeams:
+  enabled: false
+
+email:
+  default:
+    - sandbox-alerts@example.com
