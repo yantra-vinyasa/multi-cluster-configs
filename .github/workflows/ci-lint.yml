@@ -5,8 +5,7 @@ run-name: Pipeline run by @${{ github.actor }}
 on:
   pull_request:
     branches: [main]
-
-    workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   validate-yaml:
