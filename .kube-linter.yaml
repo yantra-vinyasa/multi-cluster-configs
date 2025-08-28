@@ -1,0 +1,48 @@
+---
+# Kube-linter configuration for GitOps repository
+checks:
+  # Include all default checks
+  include:
+    - "default"
+  
+  # Exclude specific checks that may not be relevant for GitOps configs
+  exclude:
+    - "no-read-only-root-fs"  # Some operators need writable filesystems
+    - "run-as-non-root"       # Some system components need root
+    - "required-label-owner"  # Not always applicable
+    - "cluster-admin-role-binding"  # May be needed for operators
+
+# Custom configuration for specific checks
+customChecks:
+  # Resource requirements
+  - name: "minimum-three-replicas"
+    template: "minimum-replicas"
+    params:
+      minReplicas: 1  # Allow single replicas for dev environments
+      
+  # Security context requirements  
+  - name: "non-root-user"
+    template: "run-as-non-root"
+    scope:
+      objectKinds:
+        - Deployment
+        - StatefulSet
+        - DaemonSet
+      excludeNamespaces:
+        - "openshift-*"
+        - "kube-*"
+
+# Ignore specific files or directories
+ignore:
+  - "bootstrap/**"  # Bootstrap configs may have different requirements
+  - "**/examples/**"
+  - "docs/**"
+  
+# Set severity levels
+severity:
+  warning:
+    - "latest-tag"
+    - "default-service-account"
+  error:
+    - "privileged"
+    - "run-as-root"

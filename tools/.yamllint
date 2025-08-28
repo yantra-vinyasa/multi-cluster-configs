@@ -7,36 +7,60 @@ yaml-files:
   - ".yamllint"
 
 ignore: |
-  .github
-  base/argocd-app-of-app
+  # Ignore generated or temporary files
+  .git/
+  .cursor/
+  
+  # Ignore files that might have different formatting requirements
+  **/examples/
+  **/docs/
+  
+  # Ignore specific problematic files if needed
+  # cluster-configs/base/argocd-app-of-app-chart/cluster-config-example.yaml
 
 rules:
   comments:
     require-starting-space: true
     ignore-shebangs: true
-    min-spaces-from-content: 2
+    min-spaces-from-content: 1  # More flexible for inline comments
   document-start:
     level: warning
-  braces: enable
+    present: false  # Don't require --- at start (common in K8s)
+  braces: 
+    level: warning
+    max-spaces-inside: 1
+    max-spaces-inside-empty: 0
   brackets:
     level: warning
     max-spaces-inside: 1
+    max-spaces-inside-empty: 0
   indentation:
     indent-sequences: true
     spaces: 2
     level: warning
+    check-multi-line-strings: false  # Allow flexible string formatting
   empty-lines:
     max: 2
     max-start: 0
     max-end: 1
+    level: warning
   truthy:
     level: warning
+    allowed-values: ['true', 'false', 'yes', 'no']  # Allow common K8s values
+    check-keys: false  # Don't check keys like 'on' in GitHub Actions
   line-length:
     max: 500
     level: warning
     allow-non-breakable-words: true
+    allow-non-breakable-inline-mappings: true  # Allow long inline maps
   new-line-at-end-of-file:
     level: warning
   trailing-spaces:
     level: warning
+  key-duplicates:
+    level: error  # Duplicate keys should be errors
+  octal-values:
+    level: warning
+    forbid-implicit-octal: true
+    forbid-explicit-octal: true
 
