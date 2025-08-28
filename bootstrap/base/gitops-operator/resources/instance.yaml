@@ -13,6 +13,7 @@ spec:
     ui.bannerposition: top
     ui.bannerurl: www.bannerlink.com
   applicationInstanceLabelKey: argocd.argoproj.io/instance
+  resourceTrackingMethod: annotation
   controller:
     logLevel: info
     processors: {}
