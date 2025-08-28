@@ -6,7 +6,7 @@ metadata:
   namespace: openshift-image-registry
 spec:
   accessModes:
-  - ReadWriteOnly
+    - ReadWriteOnly
   resources:
     requests:
       storage: 200Gi

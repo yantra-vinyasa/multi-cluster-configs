@@ -9,20 +9,20 @@ metadata:
 spec:
   nodeSelector:
     nodeSelectorTerms:
-    - matchExpressions:
-      - key: cluster.ocs.openshift.io/openshift-storage
-        operator: Exists
+      - matchExpressions:
+          - key: cluster.ocs.openshift.io/openshift-storage
+            operator: Exists
   tolerations:
-  - effect: NoSchedule
-    key: node.ocs.openshift.io/storage
-    operator: Equal
-    value: "true"
+    - effect: NoSchedule
+      key: node.ocs.openshift.io/storage
+      operator: Equal
+      value: "true"
   deviceInclusionSpec:
     deviceTypes:
-    - disk
-    minSize: PATCH_ME 
-    maxSize: PATCH_ME 
+      - disk
+    minSize: PATCH_ME
+    maxSize: PATCH_ME
   storageClassName: lso-volumeset
   volumeMode: Block
-  maxDeviceCount: PATCH_ME 
+  maxDeviceCount: PATCH_ME
 ...

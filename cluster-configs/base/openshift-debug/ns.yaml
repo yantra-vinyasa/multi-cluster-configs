@@ -1,3 +1,4 @@
+---
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -8,4 +9,4 @@ metadata:
   name: openshift-debug
 spec:
   finalizers:
-  - kubernetes
+    - kubernetes

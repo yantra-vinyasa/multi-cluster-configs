@@ -1,3 +1,4 @@
+---
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
@@ -5,4 +6,4 @@ metadata:
   namespace: openshift-gatekeeper-operator
 spec:
   targetNamespaces:
-  - openshift-gatekeeper-operator
+    - openshift-gatekeeper-operator

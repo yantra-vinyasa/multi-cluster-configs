@@ -3,7 +3,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: ArgoCD
 metadata:
   finalizers:
-  - argoproj.io/finalizer
+    - argoproj.io/finalizer
   name: openshift-gitops
   namespace: openshift-gitops
 spec:
@@ -37,39 +37,39 @@ spec:
     route:
       enabled: false
   rbac:
-    policy: patch_me 
+    policy: patch_me
     scopes: '[groups]'
   redis: {}
   repo:
     env:
-    - name: KUSTOMIZE_PLUGIN_HOME
-      value: /etc/kustomize/plugin
+      - name: KUSTOMIZE_PLUGIN_HOME
+        value: /etc/kustomize/plugin
     initContainers:
-    - args:
-      - -c
-      - cp /etc/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator/PolicyGenerator
-        /policy-generator/PolicyGenerator
-      command:
-      - /bin/bash
-      image: registry.redhat.io/rhacm2/multicluster-operators-subscription-rhel8:v2.8.0
-      name: policy-generator-install
-      volumeMounts:
-      - mountPath: /policy-generator
-        name: policy-generator
+      - args:
+          - -c
+          - cp /etc/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator/PolicyGenerator
+            /policy-generator/PolicyGenerator
+        command:
+          - /bin/bash
+        image: registry.redhat.io/rhacm2/multicluster-operators-subscription-rhel8:v2.8.0
+        name: policy-generator-install
+        volumeMounts:
+          - mountPath: /policy-generator
+            name: policy-generator
     logLevel: debug
     volumeMounts:
-    - mountPath: /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
-      subPath: ca-bundle.crt
-      name: cluster-root-ca-bundle
-    - mountPath: /etc/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator
-      name: policy-generator
+      - mountPath: /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
+        subPath: ca-bundle.crt
+        name: cluster-root-ca-bundle
+      - mountPath: /etc/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator
+        name: policy-generator
     volumes:
-    - configMap:
-         name: cluster-root-ca-bundle
-      name: cluster-root-ca-bundle
-      optional: true
-    - emptyDir: {}
-      name: policy-generator
+      - configMap:
+          name: cluster-root-ca-bundle
+        name: cluster-root-ca-bundle
+        optional: true
+      - emptyDir: {}
+        name: policy-generator
   resourceExclusions: |
     - apiGroups:
       - tekton.dev

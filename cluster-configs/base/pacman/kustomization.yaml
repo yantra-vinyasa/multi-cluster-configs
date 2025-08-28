@@ -4,6 +4,6 @@ kind: Kustomization
 namespace: example-1
 
 resources:
-- resources/namespace.yaml
-- resources/pacman.yaml
-- resources/mongodb.yaml
+  - resources/namespace.yaml
+  - resources/pacman.yaml
+  - resources/mongodb.yaml

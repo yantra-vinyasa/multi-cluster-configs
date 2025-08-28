@@ -1,3 +1,4 @@
+---
 - op: replace
   path: /spec/managementLIF
   value: 172.18.108.40
@@ -9,7 +10,10 @@
 - op: replace
   path: /spec/svm
   value: 'svm-demo-trident'
-  
 - op: replace
   path: /spec/aggregate
   value: 'aggr_demo_ssd_data_01'
+
+- op: replace
+  path: /spec/storagePrefix
+  value: 'demo'

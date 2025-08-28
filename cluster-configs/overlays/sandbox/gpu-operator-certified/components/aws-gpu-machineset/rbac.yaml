@@ -10,27 +10,27 @@ kind: ClusterRole
 metadata:
   name: job-aws-gpu-machineset
 rules:
-- apiGroups:
-  - machine.openshift.io
-  resources:
-  - machinesets
-  verbs:
-  - '*'
-- apiGroups:
-  - autoscaling.openshift.io
-  resources:
-  - machineautoscalers
-  verbs:
-  - '*'
-- apiGroups:
-  - ''
-  resources:
-  - secrets
-  resourceNames:
-  - aws-creds
-  verbs:
-  - get
-  - list
+  - apiGroups:
+      - machine.openshift.io
+    resources:
+      - machinesets
+    verbs:
+      - '*'
+  - apiGroups:
+      - autoscaling.openshift.io
+    resources:
+      - machineautoscalers
+    verbs:
+      - '*'
+  - apiGroups:
+      - ''
+    resources:
+      - secrets
+    resourceNames:
+      - aws-creds
+    verbs:
+      - get
+      - list
 # - nonResourceURLs:
 #   - '*'
 #   verbs:

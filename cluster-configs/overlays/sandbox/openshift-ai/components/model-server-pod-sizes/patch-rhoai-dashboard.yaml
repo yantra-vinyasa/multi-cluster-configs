@@ -1,3 +1,4 @@
+---
 apiVersion: opendatahub.io/v1alpha
 kind: OdhDashboardConfig
 metadata:

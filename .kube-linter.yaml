@@ -4,7 +4,7 @@ checks:
   # Include all default checks
   include:
     - "default"
-  
+
   # Exclude specific checks that may not be relevant for GitOps configs
   exclude:
     - "no-read-only-root-fs"  # Some operators need writable filesystems
@@ -19,8 +19,8 @@ customChecks:
     template: "minimum-replicas"
     params:
       minReplicas: 1  # Allow single replicas for dev environments
-      
-  # Security context requirements  
+
+  # Security context requirements
   - name: "non-root-user"
     template: "run-as-non-root"
     scope:
@@ -37,7 +37,7 @@ ignore:
   - "bootstrap/**"  # Bootstrap configs may have different requirements
   - "**/examples/**"
   - "docs/**"
-  
+
 # Set severity levels
 severity:
   warning:

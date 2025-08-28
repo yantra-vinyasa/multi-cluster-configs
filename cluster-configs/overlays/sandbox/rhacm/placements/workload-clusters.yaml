@@ -8,10 +8,10 @@ metadata:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   predicates:
-  - requiredClusterSelector:
-      labelSelector:
-        matchExpressions:
-        - key: name
-          operator: In
-          values:
-          - change-me
+    - requiredClusterSelector:
+        labelSelector:
+          matchExpressions:
+            - key: name
+              operator: In
+              values:
+                - change-me

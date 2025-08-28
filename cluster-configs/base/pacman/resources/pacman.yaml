@@ -16,11 +16,11 @@ spec:
         name: pacman
     spec:
       containers:
-      - image: quay.io/jpacker/nodejs-pacman-app:latest
-        name: pacman
-        ports:
-        - containerPort: 8080
-          name: http-server
+        - image: quay.io/jpacker/nodejs-pacman-app:latest
+          name: pacman
+          ports:
+            - containerPort: 8080
+              name: http-server
 ---
 apiVersion: route.openshift.io/v1
 kind: Route

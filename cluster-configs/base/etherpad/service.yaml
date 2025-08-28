@@ -8,13 +8,13 @@ metadata:
 spec:
   internalTrafficPolicy: Cluster
   ipFamilies:
-  - IPv4
+    - IPv4
   ipFamilyPolicy: SingleStack
   ports:
-  - name: http
-    port: 9001
-    protocol: TCP
-    targetPort: http
+    - name: http
+      port: 9001
+      protocol: TCP
+      targetPort: http
   selector:
     app.kubernetes.io/name: etherpad
   sessionAffinity: None

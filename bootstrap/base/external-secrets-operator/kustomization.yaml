@@ -1,7 +1,8 @@
+---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- instance/cluster-secret-store.yaml
-- instance/ns.yaml
-- instance/operator-config.yaml
-- operator/subscription.yaml
+  - instance/cluster-secret-store.yaml
+  - instance/ns.yaml
+  - instance/operator-config.yaml
+  - operator/subscription.yaml

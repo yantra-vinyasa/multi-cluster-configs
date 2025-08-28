@@ -1,8 +1,9 @@
+---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-- ../../../base/trident
+  - ../../../base/trident
 
 patches:
   - target:
@@ -10,5 +11,4 @@ patches:
       name: post-netapp-nas
       group: trident.netapp.io
       version: v1
-    path: tbc-patch.yaml 
-
+    path: tbc-patch.yaml

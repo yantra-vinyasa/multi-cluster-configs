@@ -1,3 +1,4 @@
+---
 apiVersion: maistra.io/v2
 kind: ServiceMeshControlPlane
 metadata:

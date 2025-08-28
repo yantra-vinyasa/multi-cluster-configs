@@ -1,3 +1,4 @@
+---
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -7,19 +8,19 @@ data:
   # This key 'smoketest.sh' will become the filename.
   smoketest.sh: |
     #!/bin/sh
-    
+
     echo "--- Smoke Test Script Running ---"
     echo "Date: $(date)"
-    
+
     # This is the key test. We try to list the host's sg devices.
     # If this works, our mounts and privileged context are correct.
     echo "Attempting to list host's /sys/class/scsi_generic directory..."
-    
+
     if [ -d "/sys/class/scsi_generic" ]; then
       ls -l /sys/class/scsi_generic
       echo "SUCCESS: Successfully accessed host's /sys filesystem."
     else
       echo "FAILURE: Could not access host's /sys/class/scsi_generic directory."
     fi
-    
+
     echo "--- Smoke Test Finished ---"

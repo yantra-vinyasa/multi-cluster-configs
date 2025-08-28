@@ -1,3 +1,4 @@
+---
 {{ if .Values.alertConfig.enabled }}
 ---
 apiVersion: v1
@@ -48,7 +49,7 @@ stringData:
             headers:
               subject: '{{"{{"}} template "custom_mail_subject" . {{"}}"}}'
             html: '{{"{{"}} template "custom_mail_html" . {{"}}"}}'
-      
+
       {{ if .Values.email.critical }}
       - name: openshift-to-email-critical
         email_configs:
@@ -77,7 +78,7 @@ stringData:
     {{`{{- end }}`}}
     {{`{{- end }}`}}
 
-    {{`{{ define "custom_mail_html" -}}`}}
+    {{`{{ define "custom_mail_html" }}`}}
     Cluster: {{ .Values.cluster.name }}<br>
     Number of alerts: {{`{{ len .Alerts }}`}} <br><br>
 
@@ -85,13 +86,13 @@ stringData:
     Alert Name: {{`{{ .Labels.alertname }}`}}<br>
     Severity: {{`{{ .Labels.severity }}`}}<br>
     Namespace: {{`{{ .Labels.namespace }}`}}<br>
-    {{`{{ if .Annotations.description -}}`}}
+    {{`{{ if .Annotations.description }}`}}
     Description: {{`{{ .Annotations.description }}`}}<br>
     {{`{{ end }}`}}
-    {{`{{ if .Annotations.message -}}`}}
+    {{`{{ if .Annotations.message }}`}}
     Message: {{`{{ .Annotations.message }}`}}<br>
     {{`{{ end }}`}}
     <br>
-    {{`{{ end -}}`}}
-    {{`{{- end }}`}}
+    {{`{{ end }}`}}
+    {{`{{ end }}`}}
 {{- end }}

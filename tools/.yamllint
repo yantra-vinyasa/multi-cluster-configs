@@ -10,11 +10,11 @@ ignore: |
   # Ignore generated or temporary files
   .git/
   .cursor/
-  
+
   # Ignore files that might have different formatting requirements
   **/examples/
   **/docs/
-  
+
   # Ignore specific problematic files if needed
   # cluster-configs/base/argocd-app-of-app-chart/cluster-config-example.yaml
 
@@ -25,8 +25,8 @@ rules:
     min-spaces-from-content: 1  # More flexible for inline comments
   document-start:
     level: warning
-    present: false  # Don't require --- at start (common in K8s)
-  braces: 
+    present: true  # Require --- at start (common in K8s)
+  braces:
     level: warning
     max-spaces-inside: 1
     max-spaces-inside-empty: 0

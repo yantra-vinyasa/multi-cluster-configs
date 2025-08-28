@@ -1,3 +1,4 @@
+---
 kind: ClusterPolicy
 apiVersion: nvidia.com/v1
 metadata:

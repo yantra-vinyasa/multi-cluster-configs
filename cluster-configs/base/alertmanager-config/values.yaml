@@ -1,8 +1,9 @@
+---
 alertConfig:
   enabled: true
 
 cluster:
-  name: "sandbox"
+  name: sandbox
 
 msTeams:
   enabled: false

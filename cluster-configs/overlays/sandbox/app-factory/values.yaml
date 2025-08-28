@@ -4,7 +4,7 @@ default:
     annotations:
       argocd.argoproj.io/compare-options: IgnoreExtraneous
     enabled: true
-    enableAutoSync: false  # temporary 
+    enableAutoSync: false  # temporary
     autoSyncPrune: false
     project: cluster-config
     destination:
@@ -14,12 +14,12 @@ default:
       repoURL: https://github.com/Yantra-Vinyasa/multi-cluster-configs.git
       targetRevision: main
     syncOptions:
-    - ApplyOutOfSyncOnly=true
-    - PruneLast=true
-    - ServerSideApply=true  
-    - FailOnSharedResource=true
-    - RespectIgnoreDifferences=true
-    - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+      - PruneLast=true
+      - ServerSideApply=true
+      - FailOnSharedResource=true
+      - RespectIgnoreDifferences=true
+      - CreateNamespace=true
     syncPolicyRetry:
       limit: -1 # number of failed sync attempt retries; unlimited number of attempts if less than 0
       backoff:
@@ -34,14 +34,14 @@ projects:
     description: Project for overall cluster configuration
     namespace: openshift-gitops
     sourceRepos:
-    - https://github.com/Yantra-Vinyasa/multi-cluster-configs.git
+      - https://github.com/Yantra-Vinyasa/multi-cluster-configs.git
     destinations: |
       - namespace: '*'
         server: https://kubernetes.default.svc
     extraFields: |
       clusterResourceWhitelist:
-      - group: '*'
-        kind: '*'
+        - group: '*'
+          kind: '*'
 
 applications:
 
@@ -72,7 +72,7 @@ applications:
       argocd.argoproj.io/sync-wave: '10'
     source:
       path: cluster-configs/overlays/sandbox/chrony
-  
+
   etcd-backup:
     annotations:
       argocd.argoproj.io/sync-wave: '15'
@@ -83,7 +83,7 @@ applications:
         - name: trusted-ca-bundle
           kind: ConfigMap
           jsonPointers:
-          - /data
+            - /data
 
   web-terminal-operator:
     annotations:

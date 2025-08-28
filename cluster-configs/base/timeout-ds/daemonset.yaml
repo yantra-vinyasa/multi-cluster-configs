@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
@@ -19,18 +20,18 @@ spec:
         node-role.kubernetes.io/worker: ""
       priorityClassName: system-node-critical
       tolerations:
-      - operator: "Exists"
+        - operator: "Exists"
       containers:
         - name: script-runner
           image: registry.access.redhat.com/ubi9/ubi-minimal:latest
           command:
-          - /bin/sh
-          - -c
-          - |
-            while true; do
-              /scripts/smoketest.sh
-              sleep 3600
-            done
+            - /bin/sh
+            - -c
+            - |
+              while true; do
+                /scripts/smoketest.sh
+                sleep 3600
+              done
           securityContext:
             privileged: true
           volumeMounts:

@@ -5,12 +5,12 @@ nodes:
     custom_labels:
       node-role.kubernetes.io/infra: ''
     taints:
-    - effect: NoSchedule
-      key: node-role.kubernetes.io/infra
-      value: reserved
-    - effect: NoExecute
-      key: node-role.kubernetes.io/infra
-      value: reserved
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/infra
+        value: reserved
+      - effect: NoExecute
+        key: node-role.kubernetes.io/infra
+        value: reserved
 
   - name: node2
     enabled: true
@@ -18,10 +18,10 @@ nodes:
       node-role.kubernetes.io/infra: ''
       gpu: 'true'
     taints:
-    - effect: NoSchedule
-      key: node-role.kubernetes.io/infra
-      value: reserved
-    - effect: NoExecute
-      key: node-role.kubernetes.io/infra
-      value: reserved
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/infra
+        value: reserved
+      - effect: NoExecute
+        key: node-role.kubernetes.io/infra
+        value: reserved
 

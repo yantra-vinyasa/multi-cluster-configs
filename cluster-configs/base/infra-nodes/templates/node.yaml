@@ -17,4 +17,3 @@ spec:
   taints: {{- toYaml $value.taints | nindent 4 }}
 {{- end }}
 {{- end }}
-

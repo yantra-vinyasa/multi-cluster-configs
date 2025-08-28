@@ -17,10 +17,10 @@ metadata:
     service.alpha.openshift.io/serving-cert-secret-name: plugin-serving-cert
 spec:
   ports:
-  - name: 9443-tcp
-    protocol: TCP
-    port: 9443
-    targetPort: 9443
+    - name: 9443-tcp
+      protocol: TCP
+      port: 9443
+      targetPort: 9443
   selector:
     app.kubernetes.io/name: console-plugin-nvidia-gpu
   type: ClusterIP

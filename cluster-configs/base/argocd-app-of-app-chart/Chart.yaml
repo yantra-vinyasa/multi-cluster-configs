@@ -1,3 +1,4 @@
+---
 apiVersion: v2
 name: argocd-app-of-app
 version: 0.4.0
@@ -5,6 +6,6 @@ description: Generic chart for creating series of Argo CD Applications and AppPr
 type: application
 kubeVersion: '>=1.14.6'
 sources:
- - https://github.com/gnunn-gitops/argocd-app-of-app-chart
+  - https://github.com/gnunn-gitops/argocd-app-of-app-chart
 maintainers:
-- name: Gerald Nunn
+  - name: Gerald Nunn
