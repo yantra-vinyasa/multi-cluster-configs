@@ -15,6 +15,13 @@ spec:
   applicationInstanceLabelKey: argocd.argoproj.io/instance
   resourceTrackingMethod: annotation
   controller:
+    env:
+    - name: ARGOCD_APPLICATION_CONTROLLER_REPO_SERVER_TIMEOUT_SECONDS
+      value: "120"
+    - name: ARGOCD_K8S_CLIENT_QPS
+      value: "100"
+    - name: ARGOCD_K8S_CLIENT_BURST
+      value: "200"
     logLevel: info
     processors: {}
     sharding: {}
