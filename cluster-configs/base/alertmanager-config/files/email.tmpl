@@ -1,0 +1,25 @@
+{{ define "custom_mail_subject" -}}
+{{ if eq .Status "firing" -}}
+🔥{{ .Values.cluster.name }} [{{ .CommonLabels.alertname }}] {{ .CommonLabels.instance }} is {{ .Status }}!
+{{- else -}}
+✅ {{ .Values.cluster.name }} [{{ .CommonLabels.alertname }}] {{ .CommonLabels.instance }} is {{ .Status }}!
+{{- end }}
+{{- end }}
+
+{{ define "custom_mail_html" }}
+Cluster: {{ .Values.cluster.name }}<br>
+Number of alerts: {{ len .Alerts }} <br><br>
+
+{{ range .Alerts }}
+Alert Name: {{ .Labels.alertname }}<br>
+Severity: {{ .Labels.severity }}<br>
+Namespace: {{ .Labels.namespace }}<br>
+{{ if .Annotations.description }}
+Description: {{ .Annotations.description }}<br>
+{{ end }}
+{{ if .Annotations.message }}
+Message: {{ .Annotations.message }}<br>
+{{ end }}
+<br>
+{{ end }}
+{{ end }}
