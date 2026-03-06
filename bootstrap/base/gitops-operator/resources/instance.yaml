@@ -59,7 +59,7 @@ spec:
             /policy-generator/PolicyGenerator
         command:
           - /bin/bash
-        image: registry.redhat.io/rhacm2/multicluster-operators-subscription-rhel8:v2.8.0
+        image: registry.redhat.io/rhacm2/multicluster-operators-subscription-rhel9:v2.15
         name: policy-generator-install
         volumeMounts:
           - mountPath: /policy-generator
